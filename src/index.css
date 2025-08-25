@@ -1,11 +1,19 @@
 @import "tailwindcss";
 
-/* extra opcional para tu prueba */
-.bg-hearts {
-  background-image:
-    radial-gradient(circle at 20% 10%, rgba(255, 192, 203, 0.12) 0 8px, transparent 9px),
-    radial-gradient(circle at 80% 15%, rgba(255, 182, 193, 0.10) 0 7px, transparent 8px),
-    radial-gradient(circle at 12% 85%, rgba(255, 182, 193, 0.08) 0 6px, transparent 7px),
-    radial-gradient(circle at 90% 80%, rgba(255, 182, 193, 0.06) 0 6px, transparent 7px);
-  background-size: 120px 120px, 140px 140px, 110px 110px, 130px 130px;
+.heart {
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  position: relative;
+  transform: rotate(-45deg);
+}
+/* antes: #ffb2c6 (rosa) */
+.heart::before,
+.heart::after {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  background: #8fc5ff; /* azul suave a juego con azure-400 */
+  border-radius: 50%;
 }
