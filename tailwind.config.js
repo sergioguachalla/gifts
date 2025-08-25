@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Paleta azul suave y romántica
+        // Paleta azul suave que ya tienes
         azure: {
           50:  "#f6fbff",
           100: "#eaf4ff",
@@ -16,6 +16,19 @@ export default {
           700: "#2f72c2",
           800: "#285d9d",
           900: "#224c80",
+        },
+        // Paleta rosada suave para fondos y bordes
+        blush: {
+          50:  "#fff1f5",
+          100: "#ffe4ec",
+          200: "#ffcfe0",
+          300: "#ffb7cf",
+          400: "#ff9fbe",
+          500: "#f471a6",
+          600: "#e05991",
+          700: "#be4a77",
+          800: "#9d3c62",
+          900: "#7d314f",
         },
       },
       fontFamily: {

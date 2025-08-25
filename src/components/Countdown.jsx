@@ -3,8 +3,8 @@ import { useEffect, useMemo, useState } from "react";
 // ⚠️ Ajusta la fecha/hora al cumple (zona America/La_Paz, UTC-4)
 const TARGET_ISO = "2025-09-01T00:00:00-04:00";
 
-function getDiff(targetMs) {
-  const now = Date.now();
+function getDiff(targetMs, nowFn) {
+  const now = nowFn();
   let delta = Math.max(0, targetMs - now);
 
   const days = Math.floor(delta / 86_400_000);
@@ -24,14 +24,14 @@ function getDiff(targetMs) {
 const pad2 = (n) => String(n).padStart(2, "0");
 const padDays = (n) => String(n).padStart(2, "0"); // días con al menos 2 dígitos
 
-export default function Countdown() {
+export default function Countdown({ nowFn = () => Date.now() }) {
   const target = useMemo(() => new Date(TARGET_ISO).getTime(), []);
-  const [t, setT] = useState(() => getDiff(target));
+  const [t, setT] = useState(() => getDiff(target, nowFn));
 
   useEffect(() => {
-    const id = setInterval(() => setT(getDiff(target)), 1000);
+    const id = setInterval(() => setT(getDiff(target, nowFn)), 1000);
     return () => clearInterval(id);
-  }, [target]);
+  }, [target, nowFn]);
 
   if (t.finished) {
     return (
@@ -41,13 +41,11 @@ export default function Countdown() {
     );
   }
 
-  // Etiqueta accesible (oculta) con el formato largo
   const ariaText = `${t.days} días, ${t.hours} horas, ${t.mins} minutos, ${t.secs} segundos`;
 
   return (
     <div aria-live="polite" role="group" className="inline-flex items-baseline">
       <span className="sr-only">{ariaText}</span>
-      {/* Solo números visibles */}
       <div
         aria-hidden="true"
         className="font-semibold text-2xl md:text-3xl text-azure-700 font-mono tabular-nums tracking-tight"
