@@ -24,14 +24,14 @@ export const REGALOS = [
     id: "dia5",
     titulo: "Día 4",
     frase: "Espero te guste mi amor, te amo mucho",
-    pista: "Dulce y dorado como tus gestos, acompañado de canciones que hablan de nosotros.",
+    pista: "Tres partes: una se unta, otra se escucha, otra se lee.",
     acceptedAnswers: ["miel", "playlist", "miel y playlist", "pote de miel"],
   },
   {
     id: "dia6",
     titulo: "Día 5",
     frase: "TRAMPOSILLA",
-    pista: "No es solo para beber, también para recordar que lo útil y lo cozy es lo nuestro.",
+    pista: "Uno guarda calor, el otro reparte sabor.",
     acceptedAnswers: ["tazas", "taza", "tazas personalizadas", "chocolate caliente", "molinillo"],
   },
   {

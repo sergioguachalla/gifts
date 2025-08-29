@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import { motion } from "framer-motion";
 import Countdown from "./components/Countdown.jsx";
 import GuessGift from "./components/GuessGift.jsx";
@@ -17,18 +17,21 @@ const fadeUp = {
   transition: { duration: 0.7, ease: "easeOut" },
 };
 
+// 🔥 Función corregida: usa fecha local en Bolivia
 function getCurrentGiftIndex(nowMs) {
-  const today = new Date(nowMs).toISOString().slice(0, 10); // YYYY-MM-DD
-  return GIFT_SCHEDULE[today] ?? -1; // -1 = ningún regalo
+  const localYMD = new Date(nowMs).toLocaleDateString("sv-SE", {
+    timeZone: "America/La_Paz",
+  }); // YYYY-MM-DD en hora Bolivia
+  return GIFT_SCHEDULE[localYMD] ?? -1; // -1 = ningún regalo
 }
 
 export default function App() {
   const targetMs = useMemo(() => new Date(TARGET_ISO).getTime(), []);
-  
-  // Re-render cada segundo (para que cambie solo automáticamente)
 
   const nowMs = getNowMs();
-  const todayYMD = new Date(nowMs).toISOString().slice(0, 10);
+  const todayYMD = new Date(nowMs).toLocaleDateString("sv-SE", {
+    timeZone: "America/La_Paz",
+  });
   const birthdayYMD = TARGET_ISO.slice(0, 10);
 
   // Estados clave
@@ -39,7 +42,7 @@ export default function App() {
   const currentGift = currentGiftIndex >= 0 ? REGALOS[currentGiftIndex] : null;
 
   const birthdayGift = isBirthday
-    ? (currentGift ?? REGALOS[REGALOS.length - 1])
+    ? currentGift ?? REGALOS[REGALOS.length - 1]
     : null;
 
   return (
